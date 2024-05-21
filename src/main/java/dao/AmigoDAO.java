@@ -21,7 +21,7 @@ public class AmigoDAO {
         int maiorID = 0;
         try {
             Statement stmt = this.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_amigos");
+            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_amigo");
             res.next();
             maiorID = res.getInt("id");
 
@@ -45,7 +45,7 @@ public class AmigoDAO {
 
             // Configurando a conexão
             String server = "localhost"; // Caminho do MySQL
-            String database = "db_alunos";
+            String database = "db_softwarea3";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
             String password = "root";
@@ -77,7 +77,7 @@ public class AmigoDAO {
 
         try {
             Statement stmt = this.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM tb_alunos");
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigo");
             while (res.next()) {
                 
                 int id = res.getInt("id");
@@ -98,7 +98,7 @@ public class AmigoDAO {
     }
 
     public boolean InsertAmigoBD(Amigo objeto) {
-        String sql = "INSERT INTO tb_amigos(id, nome, telefone) VALUES(?,?,?)";
+        String sql = "INSERT INTO tb_amigo(id, nome, telefone) VALUES(?,?,?)";
 
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
@@ -121,7 +121,7 @@ public class AmigoDAO {
     public boolean DeleteAmigoBD(int id) {
         try {
             Statement stmt = this.getConexao().createStatement();
-            stmt.executeUpdate("DELETE FROM tb_amigos WHERE id = " + id);
+            stmt.executeUpdate("DELETE FROM tb_amigo WHERE id = " + id);
             stmt.close();            
             
         } catch (SQLException erro) {
@@ -132,7 +132,7 @@ public class AmigoDAO {
 
     public boolean UpdateAmigoBD(Amigo objeto) {
 
-        String sql = "UPDATE tb_amigos set nome = ? ,telefone = ? WHERE id = ?";
+        String sql = "UPDATE tb_amigo set nome = ? ,telefone = ? WHERE id = ?";
 
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
@@ -159,7 +159,7 @@ public class AmigoDAO {
         
         try {
             Statement stmt = this.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigos WHERE id = " + id);
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigo WHERE id = " + id);
             res.next();
 
             objeto.setNome(res.getString("nome"));

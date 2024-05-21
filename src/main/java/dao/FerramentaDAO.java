@@ -17,7 +17,7 @@ public class FerramentaDAO {
         int maiorID = 0;
         try {
             Statement stmt = this.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_ferramentas");
+            ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_ferramenta");
             res.next();
             maiorID = res.getInt("id");
 
@@ -40,7 +40,7 @@ public class FerramentaDAO {
 
             // Configurando a conexão
             String server = "localhost"; // Caminho do MySQL
-            String database = "db_softwareA3";
+            String database = "db_softwarea3";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
             String password = "root";
