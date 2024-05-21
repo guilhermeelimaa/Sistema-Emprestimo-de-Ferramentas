@@ -4,6 +4,8 @@
  */
 package visao;
 
+import modelo.Emprestimo;
+
 /**
  *
  * @author kaios
@@ -13,8 +15,11 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
     /**
      * Creates new form CadastroEmprestimos
      */
+    private Emprestimo objetoemprestimo;
+
     public CadastroEmprestimo() {
         initComponents();
+        this.objetoemprestimo = new Emprestimo();
         setTitle("Cadastrar Empréstimos");
     }
 

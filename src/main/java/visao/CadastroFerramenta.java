@@ -4,6 +4,8 @@
  */
 package visao;
 
+import modelo.Ferramenta;
+
 /**
  *
  * @author User
@@ -13,8 +15,10 @@ public class CadastroFerramenta extends javax.swing.JFrame {
     /**
      * Creates new form CadastroFerramentas
      */
+    private Ferramenta objetoferramenta;
     public CadastroFerramenta() {
         initComponents();
+        this.objetoferramenta = new Ferramenta();
         setTitle("Cadastrar Ferramentas");
     }
 

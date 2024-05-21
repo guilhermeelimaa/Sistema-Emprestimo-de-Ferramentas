@@ -4,6 +4,8 @@
  */
 package visao;
 
+import modelo.Amigo;
+
 /**
  *
  * @author User
@@ -13,8 +15,11 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
     /**
      * Creates new form GerenciamentoAmigo
      */
+    private Amigo objetoamigo;
+
     public GerenciamentoAmigo() {
         initComponents();
+        this.objetoamigo = new Amigo();
     }
 
     /**

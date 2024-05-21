@@ -4,6 +4,8 @@
  */
 package visao;
 
+import modelo.Emprestimo;
+
 /**
  *
  * @author User
@@ -13,8 +15,11 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
     /**
      * Creates new form GerenciamentoEmprestimo
      */
+    private Emprestimo objetoemprestimo;
+
     public GerenciamentoEmprestimo() {
         initComponents();
+        this.objetoemprestimo = new Emprestimo();
     }
 
     /**

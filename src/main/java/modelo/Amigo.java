@@ -18,7 +18,7 @@ public class Amigo extends Ferramenta {
     public Amigo(String nome, String telefone) {
         this.nome = nome;
         this.telefone = telefone;
-        this.dao = new AmigoDAO(); // 
+        this.dao = new AmigoDAO();
     }
 
     public Amigo(int id, String nome, String telefone) {
@@ -60,41 +60,38 @@ public class Amigo extends Ferramenta {
                 + "\n -----------";
     }
 
-    public ArrayList getMinhaLista() {
-        
+    public ArrayList<Amigo> getMinhaLista() {
         return dao.getMinhaLista();
+    }
+
+    public boolean InsertAmigoBD(int id, String nome, String telefone) throws SQLException {
+        Amigo objeto = new Amigo(id, nome, telefone);
+        dao.InsertAmigoBD(objeto);
+        return true;
     }
 
     public boolean InsertAmigoBD(String nome, String telefone) throws SQLException {
         int id = this.maiorID() + 1;
-        Amigo objeto = new Amigo(nome, telefone);
-       
-        dao.InsertAmigoBD(objeto);
-        return true;
-
+        return InsertAmigoBD(id, nome, telefone);
     }
 
- 
     public boolean DeleteAmigoBD(int id) {
-
         dao.DeleteAmigoBD(id);
         return true;
     }
 
-
-    public boolean UpdateAmigoBD(String nome, String telefone) {
-        Amigo objeto = new Amigo(nome, telefone);
+    public boolean UpdateAmigoBD(int id, String nome, String telefone) {
+        Amigo objeto = new Amigo(id, nome, telefone);
         dao.UpdateAmigoBD(objeto);
         return true;
     }
 
     public Amigo carregaAmigo(int id) {
-        dao.carregaAmigo(id);
-        return null;
+        return dao.carregaAmigo(id);
     }
 
-        public int maiorID() throws SQLException{
-
+    public int maiorID() throws SQLException {
         return dao.maiorID();
     }   
 }
+

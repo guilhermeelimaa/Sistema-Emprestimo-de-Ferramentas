@@ -4,6 +4,11 @@
  */
 package visao;
 
+import javax.swing.JOptionPane;
+import modelo.Amigo;
+import java.sql.SQLException;
+
+
 /**
  *
  * @author User
@@ -13,8 +18,11 @@ public class CadastroAmigo extends javax.swing.JFrame {
     /**
      * Creates new form CadastroAmigos
      */
+    private Amigo objetoamigo;
+
     public CadastroAmigo() {
         initComponents();
+        this.objetoamigo = new Amigo();
         setTitle("Cadastrar Amigos");
     }
 
@@ -37,6 +45,11 @@ public class CadastroAmigo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         JBCadastrar.setText("Cadastrar");
+        JBCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCadastrarActionPerformed(evt);
+            }
+        });
 
         JBVoltar.setText("Cancelar");
         JBVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,10 +115,49 @@ public class CadastroAmigo extends javax.swing.JFrame {
         objetotela.setVisible(true);
     }//GEN-LAST:event_JBVoltarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
+        // TODO add your handling code here:
+         try {
+        String nome = "";
+        String telefone = "";
+        
+        if (this.JTFNomeA.getText().length() < 2) {
+            throw new Mensagens("Nome deve conter ao menos 2 caracteres.");
+        } else {
+            nome = this.JTFNomeA.getText();
+        }
+        
+        if (this.JTFTelefone.getText().length() <= 8) {
+            throw new Mensagens("Número de telefone deve conter ao menos 8 caracteres");
+        } else {
+            telefone = this.JTFTelefone.getText();
+        }
+        
+        // Geração do id
+        int id = this.objetoamigo.maiorID() + 1;
+
+        if (this.objetoamigo.InsertAmigoBD(id, nome, telefone)) {
+            JOptionPane.showMessageDialog(rootPane, "Amigo Cadastrado com Sucesso!");
+
+            this.JTFNomeA.setText("");
+            this.JTFTelefone.setText("");
+        }
+
+        System.out.println(this.objetoamigo.getMinhaLista().toString());
+    } catch (Mensagens erro) {
+        JOptionPane.showMessageDialog(null, erro.getMessage());
+    } catch (NumberFormatException erro2) {
+        JOptionPane.showMessageDialog(null, "Informe um número válido.");
+    } catch (SQLException erro3) {
+        JOptionPane.showMessageDialog(null, "Erro de SQL: " + erro3.getMessage());
+    }
+    
+    }//GEN-LAST:event_JBCadastrarActionPerformed
+
+/**
+ * @param args the command line arguments
+ */
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -116,16 +168,28 @@ public class CadastroAmigo extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroAmigo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroAmigo.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CadastroAmigo.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CadastroAmigo.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CadastroAmigo.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

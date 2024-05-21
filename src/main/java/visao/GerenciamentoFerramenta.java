@@ -4,6 +4,8 @@
  */
 package visao;
 
+import modelo.Ferramenta;
+
 /**
  *
  * @author User
@@ -13,8 +15,11 @@ public class GerenciamentoFerramenta extends javax.swing.JFrame {
     /**
      * Creates new form GerenciamentoFerramenta
      */
+    private Ferramenta objetoferramenta;
+
     public GerenciamentoFerramenta() {
         initComponents();
+        this.objetoferramenta = new Ferramenta();
     }
 
     /**
