@@ -6,7 +6,7 @@ package visao;
 
 /**
  *
- * @author 1072321803
+ * @author User
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -15,6 +15,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+            setTitle("Menu");
+
     }
 
     /**
@@ -26,7 +28,72 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jCadastroAmigo = new javax.swing.JMenuItem();
+        jCadastroFerramenta = new javax.swing.JMenuItem();
+        jEstoque = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        jMenuItem1.setText("jMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenu3.setText("Cadastro");
+
+        jCadastroAmigo.setText("Cadastro Amigos");
+        jCadastroAmigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCadastroAmigoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jCadastroAmigo);
+
+        jCadastroFerramenta.setText("Cadastro Ferramentas");
+        jCadastroFerramenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCadastroFerramentaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jCadastroFerramenta);
+
+        jEstoque.setText("Cadastro Empréstimos");
+        jEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEstoqueActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jEstoque);
+
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Relatórios");
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenu4.add(jMenuItem2);
+
+        jMenuItem3.setText("jMenuItem3");
+        jMenu4.add(jMenuItem3);
+
+        jMenuItem4.setText("jMenuItem4");
+        jMenu4.add(jMenuItem4);
+
+        jMenuBar2.add(jMenu4);
+
+        setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -36,11 +103,32 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jCadastroAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastroAmigoActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        CadastroAmigo objeto = new CadastroAmigo();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jCadastroAmigoActionPerformed
+
+    private void jCadastroFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastroFerramentaActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        CadastroFerramenta objeto = new CadastroFerramenta();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jCadastroFerramentaActionPerformed
+
+    private void jEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEstoqueActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        CadastroEmprestimo objeto = new CadastroEmprestimo();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jEstoqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +166,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jCadastroAmigo;
+    private javax.swing.JMenuItem jCadastroFerramenta;
+    private javax.swing.JMenuItem jEstoque;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }

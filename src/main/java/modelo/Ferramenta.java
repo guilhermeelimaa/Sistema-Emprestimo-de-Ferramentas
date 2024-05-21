@@ -1,13 +1,112 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
-/**
- *
- * @author 1072321803
- */
+import java.util.*;
+import DAO.FerramentaDAO;
+import java.sql.SQLException;
+
 public class Ferramenta {
+
+    private int id;
+    private String nome;
+    private String marca;
+    private Double custo;
+    private final FerramentaDAO dao;
+
+    public Ferramenta() {
+        this.dao = new FerramentaDAO();
+    }
+     public Ferramenta(String nome, String marca, Double custo) {
+        this.nome = nome;
+        this.marca = marca;
+        this.custo = custo;
+        this.dao = new FerramentaDAO(); 
+    }
+
+    public Ferramenta(int id, String nome, String marca, double custo) {
+        this.id = id;
+        this.nome = nome;
+        this.marca = marca;
+        this.custo = custo;
+        this.dao = new FerramentaDAO();
+    }
+
     
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public double getCusto() {
+        return custo;
+    }
+
+    public void setCusto(Double custo) {
+        this.custo = custo;
+    }
+    @Override
+    public String toString() {
+        return "\n ID: " + this.getId()
+                + "\n Nome: " + this.getNome()
+                + "\n Marca: " + this.getMarca()
+                + "\n Custo: " + this.getCusto() 
+                + "\n -----------";
+    }
+     public ArrayList getMinhaLista() {
+        
+        return dao.getMinhaLista();
+    }
+
+    public boolean InsertFerramentaBD(String nome, String marca, double Custo) throws SQLException {
+        int id = this.maiorID() + 1;
+        Ferramenta objeto = new Ferramenta(nome, marca, custo);
+       
+        dao.InsertFerramentaBD(objeto);
+        return true;
+
+    }
+
+ 
+    public boolean DeleteFerramentaBD(int id) {
+
+        dao.DeleteFerramentaBD(id);
+        return true;
+    }
+
+
+    public boolean UpdateFerramentaBD(String nome, String marca, Double custo) {
+        Ferramenta objeto = new Ferramenta(nome, marca, custo);
+        dao.UpdateFerramentaBD(objeto);
+        return true;
+    }
+
+    public Amigo carregaFerramenta(int id) {
+        dao.carregaFerramenta(id);
+        return null;
+    }
+
+        public int maiorID() throws SQLException{
+
+        return dao.maiorID();
+    }   
 }
+   
