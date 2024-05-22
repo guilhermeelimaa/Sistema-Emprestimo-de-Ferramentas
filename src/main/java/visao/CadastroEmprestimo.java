@@ -4,6 +4,10 @@
  */
 package visao;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.Emprestimo;
 
 /**
@@ -46,6 +50,11 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         JBCadastrar.setText("Cadastrar");
+        JBCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCadastrarActionPerformed(evt);
+            }
+        });
 
         JBVoltar.setText("Cancelar");
         JBVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,12 +74,6 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Data Entrega:");
-
-        JTFDataEntrega.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTFDataEntregaActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,8 +117,8 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JTFDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(JTFDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBCadastrar)
@@ -134,9 +137,57 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
         objetotela.setVisible(true);
     }//GEN-LAST:event_JBVoltarActionPerformed
 
-    private void JTFDataEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFDataEntregaActionPerformed
+    private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTFDataEntregaActionPerformed
+        try {
+            int id = 0;
+            String amigo = "";
+            String ferramenta = "";
+            String dataaquisicao = "";
+            String dataentrega = "";
+            if (this.JTFAmigo.getText().length() < 2) {
+                throw new Mensagens("Nome do amigo deve conter ao menos 2 caracteres.");
+            } else {
+                amigo = this.JTFAmigo.getText();
+            }
+            if (this.JTFFerramenta.getText().length() < 3) {
+                throw new Mensagens("Ferramenta deve conter ao menos 3 caracteres");
+            } else {
+                ferramenta = this.JTFFerramenta.getText();
+            }
+            if (this.JTFDataAquisicao.getText().length() < 8) {
+                throw new Mensagens("Data de aquisição deve conter ao menos 8 caracteres.");
+            } else {
+                String dataAquisicaoString = this.JTFDataAquisicao.getText();
+
+                dataaquisicao = this.JTFDataAquisicao.getText();
+            }
+            if (this.JTFDataEntrega.getText().length() < 8) {
+                throw new Mensagens("Data de entrega deve conter ao menos 8 caracteres.");
+            } else {
+                String dataEntregaString = this.JTFDataEntrega.getText();
+
+                dataentrega = this.JTFDataEntrega.getText();
+            }
+
+            if (this.objetoemprestimo.InsertEmprestimoBD(id, amigo, ferramenta, dataaquisicao, dataentrega)) {
+                JOptionPane.showMessageDialog(rootPane, "Emprestimo Cadastrado com Sucesso!");
+
+                this.JTFAmigo.setText("");
+                this.JTFFerramenta.setText("");
+                this.JTFDataAquisicao.setText("");
+                this.JTFDataEntrega.setText("");
+            }
+
+            System.out.println(this.objetoemprestimo.getMinhaLista().toString());
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_JBCadastrarActionPerformed
 
     /**
      * @param args the command line arguments

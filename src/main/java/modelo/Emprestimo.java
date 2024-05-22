@@ -10,8 +10,8 @@ public class Emprestimo {
     private int id;
     private String amigo;
     private String ferramenta;
-    private Date dataaquisicao;
-    private Date dataentrega;
+    private String dataaquisicao;
+    private String dataentrega;
     private final EmprestimoDAO dao;
 
     // Construtor padrão
@@ -20,7 +20,7 @@ public class Emprestimo {
     }
 
     // Construtor com parâmetros
-    public Emprestimo(int id, String amigo, String ferramenta, Date dataaquisicao, Date dataentrega) {
+    public Emprestimo(int id, String amigo, String ferramenta, String dataaquisicao, String dataentrega) {
         this.id = id;
         this.amigo = amigo;
         this.ferramenta = ferramenta;
@@ -53,19 +53,19 @@ public class Emprestimo {
         this.ferramenta = ferramenta;
     }
 
-    public Date getDataaquisicao() {
+    public String getDataaquisicao() {
         return dataaquisicao;
     }
 
-    public void setDataaquisicao(Date dataaquisicao) {
+    public void setDataaquisicao(String dataaquisicao) {
         this.dataaquisicao = dataaquisicao;
     }
 
-    public Date getDataentrega() {
+    public String getDataentrega() {
         return dataentrega;
     }
 
-    public void setDataentrega(Date dataentrega) {
+    public void setDataentrega(String dataentrega) {
         this.dataentrega = dataentrega;
     }
 
@@ -82,7 +82,7 @@ public class Emprestimo {
         return dao.getMinhaLista();
     }
 
-    public boolean InsertEmprestimoBD(int id, String amigo, String ferramenta, Date dataaquisicao, Date dataentrega) throws SQLException {
+    public boolean InsertEmprestimoBD(int id, String amigo, String ferramenta, String dataaquisicao, String dataentrega) throws SQLException {
         Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega);
         dao.InsertEmprestimoBD(objeto);
         return true;
@@ -93,7 +93,7 @@ public class Emprestimo {
         return true;
     }
 
-    public boolean UpdateEmprestimoBD(int id, String amigo, String ferramenta, Date dataaquisicao, Date dataentrega) {
+    public boolean UpdateEmprestimoBD(int id, String amigo, String ferramenta, String dataaquisicao, String dataentrega) {
         Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega);
         dao.UpdateEmprestimoBD(objeto);
         return true;

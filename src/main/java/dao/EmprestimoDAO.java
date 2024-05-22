@@ -72,8 +72,8 @@ public class EmprestimoDAO {
                 int id = res.getInt("id");
                 String amigo = res.getString("amigo");
                 String ferramenta = res.getString("ferramenta");
-                Date dataaquisicao = res.getDate("dataaquisicao");
-                Date dataentrega = res.getDate("dataentrega");
+                String dataaquisicao = res.getString("dataaquisicao");
+                String dataentrega = res.getString("dataentrega");
                 Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega);
                 MinhaLista.add(objeto);
             }
@@ -94,8 +94,8 @@ public class EmprestimoDAO {
             stmt.setInt(1, objeto.getId());
             stmt.setString(2, objeto.getAmigo());
             stmt.setString(3, objeto.getFerramenta());
-            stmt.setDate(4, new java.sql.Date(objeto.getDataaquisicao().getTime()));
-            stmt.setDate(5, new java.sql.Date(objeto.getDataentrega().getTime()));
+            stmt.setString(4, objeto.getDataaquisicao());
+            stmt.setString(5, objeto.getDataentrega());
 
             stmt.execute();
             stmt.close();
@@ -126,9 +126,9 @@ public class EmprestimoDAO {
 
             stmt.setString(1, objeto.getAmigo());
             stmt.setString(2, objeto.getFerramenta());
-            stmt.setDate(3, new java.sql.Date(objeto.getDataaquisicao().getTime()));
-            stmt.setDate(4, new java.sql.Date(objeto.getDataentrega().getTime()));
-            stmt.setInt(5, objeto.getId());
+            stmt.setString(3, objeto.getDataaquisicao()); 
+            stmt.setString(4, objeto.getDataentrega()); 
+            stmt.setInt(5, objeto.getId()); 
 
             stmt.execute();
             stmt.close();
@@ -150,8 +150,8 @@ public class EmprestimoDAO {
             if (res.next()) {
                 objeto.setAmigo(res.getString("amigo"));
                 objeto.setFerramenta(res.getString("ferramenta"));
-                objeto.setDataaquisicao(res.getDate("dataaquisicao"));
-                objeto.setDataentrega(res.getDate("dataentrega"));
+                objeto.setDataaquisicao(res.getString("dataaquisicao"));
+                objeto.setDataentrega(res.getString("dataentrega"));
             }
             stmt.close();
         } catch (SQLException erro) {

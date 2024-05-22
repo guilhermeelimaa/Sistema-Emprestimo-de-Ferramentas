@@ -71,7 +71,7 @@ public class FerramentaDAO {
 
         try {
             Statement stmt = this.getConexao().createStatement();
-            ResultSet res = stmt.executeQuery("SELECT FROM * tb_ferramenta");
+            ResultSet res = stmt.executeQuery("SELECT * FROM tb_ferramenta");
             while (res.next()) {
 
                 int id = res.getInt("id");
@@ -93,7 +93,7 @@ public class FerramentaDAO {
     }
 
     public boolean InsertFerramentaBD(Ferramenta objeto) {
-        String sql = "INSERT INTO tb_ferramenta(id, nome, marca custo) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO tb_ferramenta(id, nome, marca ,custo) VALUES(?,?,?,?)";
 
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
@@ -124,26 +124,24 @@ public class FerramentaDAO {
         return true;
     }
 
-    public boolean UpdateFerramentaBD(Ferramenta objeto) {
-
-        String sql = "UPDATE tb_ferramenta set nome = ?,marca = ?, custo = ? WHERE id = ?";
+    public boolean UpdateFerramentaBD(int id, String nome, String marca, double custo) {
+        String sql = "UPDATE tb_ferramenta SET nome = ?, marca = ?, custo = ? WHERE id = ?";
 
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
 
-            stmt.setInt(1, objeto.getId());
-            stmt.setString(2, objeto.getNome());
-            stmt.setString(3, objeto.getMarca());
-            stmt.setDouble(4, objeto.getCusto());
+            stmt.setString(1, nome);
+            stmt.setString(2, marca);
+            stmt.setDouble(3, custo);
+            stmt.setInt(4, id);
 
-            stmt.execute();
+            int rowsAffected = stmt.executeUpdate();
             stmt.close();
 
-            return true;
+            return rowsAffected > 0;
 
         } catch (SQLException erro) {
             throw new RuntimeException(erro);
-
         }
     }
 
@@ -169,4 +167,3 @@ public class FerramentaDAO {
         return objeto;
     }
 }
-

@@ -4,6 +4,10 @@
  */
 package visao;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.Ferramenta;
 
 /**
@@ -16,10 +20,12 @@ public class CadastroFerramenta extends javax.swing.JFrame {
      * Creates new form CadastroFerramentas
      */
     private Ferramenta objetoferramenta;
+
     public CadastroFerramenta() {
         initComponents();
         this.objetoferramenta = new Ferramenta();
         setTitle("Cadastrar Ferramentas");
+        
     }
 
     /**
@@ -129,6 +135,45 @@ public class CadastroFerramenta extends javax.swing.JFrame {
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
         // TODO add your handling code here:
+        try {
+            String nome = "";
+            String marca = "";
+            double custo = 0;
+
+            if (this.JTFNomeF.getText().length() < 2) {
+                throw new Mensagens("Nome da Ferramenta deve conter ao menos 2 caracteres.");
+            } else {
+                nome = this.JTFNomeF.getText();
+            }
+
+            if (this.JTFMarca.getText().length() < 3) {
+                throw new Mensagens("Marca deve conter ao menos 3 caracteres");
+            } else {
+                marca = this.JTFMarca.getText();
+            }
+            if (this.JTFCusto.getText().length() < 1) {
+                throw new Mensagens("Custo deve conter ao menos 1 caracteres");
+            } else {
+                custo = Double.parseDouble(this.JTFCusto.getText()); // Atribuir valor do campo de texto a variável custo
+            }
+
+            if (this.objetoferramenta.InsertFerramentaBD(nome, marca, custo)) {
+                JOptionPane.showMessageDialog(rootPane, "Ferramenta Cadastrada com Sucesso!");
+
+                this.JTFNomeF.setText("");
+                this.JTFMarca.setText("");
+                this.JTFCusto.setText("");
+            }
+
+            System.out.println(this.objetoferramenta.getMinhaLista().toString());
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroFerramenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
@@ -136,8 +181,8 @@ public class CadastroFerramenta extends javax.swing.JFrame {
         dispose();
         MenuPrincipal objetotela = new MenuPrincipal();
         // Torna a janela visível
-        objetotela.setVisible(true);    
-        
+        objetotela.setVisible(true);
+
     }//GEN-LAST:event_JBVoltarActionPerformed
 
     /**

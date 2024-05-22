@@ -75,16 +75,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerenciar Amigo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jGerenciarAmigoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jGerenciarFerramenta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerenciar Ferramenta"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jGerenciarFerramentaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jGerenciarEmprestimo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerenciar Empr&#xe9;stimo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jGerenciarEmprestimoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

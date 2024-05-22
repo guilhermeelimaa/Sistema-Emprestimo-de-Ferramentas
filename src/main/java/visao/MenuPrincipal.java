@@ -96,12 +96,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Gerenciamento");
 
         jGerenciarAmigo.setText("Gerenciar Amigo");
+        jGerenciarAmigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jGerenciarAmigoActionPerformed(evt);
+            }
+        });
         jMenu3.add(jGerenciarAmigo);
 
         jGerenciarFerramenta.setText("Gerenciar Ferramenta");
+        jGerenciarFerramenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jGerenciarFerramentaActionPerformed(evt);
+            }
+        });
         jMenu3.add(jGerenciarFerramenta);
 
         jGerenciarEmprestimo.setText("Gerenciar Empréstimo");
+        jGerenciarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jGerenciarEmprestimoActionPerformed(evt);
+            }
+        });
         jMenu3.add(jGerenciarEmprestimo);
 
         jMenuBar2.add(jMenu3);
@@ -162,10 +177,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuSairActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void jGerenciarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGerenciarAmigoActionPerformed
+        // TODO add your handling code here:
+        GerenciamentoAmigo objeto = new GerenciamentoAmigo();
+        objeto.setVisible(true);
+
+    }//GEN-LAST:event_jGerenciarAmigoActionPerformed
+
+    private void jGerenciarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGerenciarFerramentaActionPerformed
+        // TODO add your handling code here:
+        GerenciamentoFerramenta objeto = new GerenciamentoFerramenta();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jGerenciarFerramentaActionPerformed
+
+    private void jGerenciarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGerenciarEmprestimoActionPerformed
+        // TODO add your handling code here:
+        GerenciamentoEmprestimo objeto = new GerenciamentoEmprestimo();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jGerenciarEmprestimoActionPerformed
+
+/**
+ * @param args the command line arguments
+ */
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -176,16 +210,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

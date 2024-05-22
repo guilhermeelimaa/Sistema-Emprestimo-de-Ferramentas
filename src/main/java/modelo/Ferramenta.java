@@ -15,11 +15,13 @@ public class Ferramenta {
     public Ferramenta() {
         this.dao = new FerramentaDAO();
     }
-     public Ferramenta(String nome, String marca, Double custo) {
+
+    public Ferramenta(int id, String nome, String marca, Double custo) {
+        this.id = id;
         this.nome = nome;
         this.marca = marca;
         this.custo = custo;
-        this.dao = new FerramentaDAO(); 
+        this.dao = new FerramentaDAO();
     }
 
     public Ferramenta(int id, String nome, String marca, double custo) {
@@ -29,8 +31,6 @@ public class Ferramenta {
         this.custo = custo;
         this.dao = new FerramentaDAO();
     }
-
-    
 
     public int getId() {
         return id;
@@ -63,40 +63,37 @@ public class Ferramenta {
     public void setCusto(Double custo) {
         this.custo = custo;
     }
+
     @Override
     public String toString() {
         return "\n ID: " + this.getId()
                 + "\n Nome: " + this.getNome()
                 + "\n Marca: " + this.getMarca()
-                + "\n Custo: " + this.getCusto() 
+                + "\n Custo: " + this.getCusto()
                 + "\n -----------";
     }
-     public ArrayList getMinhaLista() {
-        
+
+    public ArrayList getMinhaLista() {
+
         return dao.getMinhaLista();
     }
 
-    public boolean InsertFerramentaBD(String nome, String marca, double Custo) throws SQLException {
+    public boolean InsertFerramentaBD(String nome, String marca, double custo) throws SQLException {
         int id = this.maiorID() + 1;
-        Ferramenta objeto = new Ferramenta(nome, marca, custo);
-       
+        Ferramenta objeto = new Ferramenta(id, nome, marca, custo);
+
         dao.InsertFerramentaBD(objeto);
         return true;
-
     }
 
- 
     public boolean DeleteFerramentaBD(int id) {
 
         dao.DeleteFerramentaBD(id);
         return true;
     }
 
-
-    public boolean UpdateFerramentaBD(String nome, String marca, Double custo) {
-        Ferramenta objeto = new Ferramenta(nome, marca, custo);
-        dao.UpdateFerramentaBD(objeto);
-        return true;
+    public boolean UpdateFerramentaBD(int id, String nome, String marca, double custo) {
+        return dao.UpdateFerramentaBD(id, nome, marca, custo);
     }
 
     public Amigo carregaFerramenta(int id) {
@@ -104,9 +101,8 @@ public class Ferramenta {
         return null;
     }
 
-        public int maiorID() throws SQLException{
+    public int maiorID() throws SQLException {
 
         return dao.maiorID();
-    }   
+    }
 }
-   
