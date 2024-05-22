@@ -5,8 +5,9 @@ import java.util.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Emprestimo extends Amigo {
+public class Emprestimo {
 
+    private int id;
     private String amigo;
     private String ferramenta;
     private Date dataaquisicao;

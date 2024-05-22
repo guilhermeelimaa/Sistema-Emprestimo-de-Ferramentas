@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 public class EmprestimoDAO {
 
-    public static ArrayList<Emprestimo> MinhaLista = new ArrayList<Emprestimo>();
+    public static ArrayList<Emprestimo> MinhaLista = new ArrayList<>();
 
     public EmprestimoDAO() {
     }
