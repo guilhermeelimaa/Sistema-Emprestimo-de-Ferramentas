@@ -43,9 +43,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jGerenciarFerramenta = new javax.swing.JMenuItem();
         jGerenciarEmprestimo = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -59,7 +59,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuCadastro.setText("Cadastro");
 
-        jCadastroAmigo.setText("Cadastro Amigo");
+        jCadastroAmigo.setText("Cadastrar Amigo");
         jCadastroAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCadastroAmigoActionPerformed(evt);
@@ -67,7 +67,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jCadastroAmigo);
 
-        jCadastroFerramenta.setText("Cadastro Ferramenta");
+        jCadastroFerramenta.setText("Cadastrar Ferramenta");
         jCadastroFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCadastroFerramentaActionPerformed(evt);
@@ -75,7 +75,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jCadastroFerramenta);
 
-        jCadastroEmprestimos.setText("Cadastro Empréstimo");
+        jCadastroEmprestimos.setText("Cadastrar Empréstimo");
         jCadastroEmprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCadastroEmprestimosActionPerformed(evt);
@@ -122,15 +122,35 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar2.add(jMenu3);
 
         jMenuRelatorios.setText("Relatórios");
+        jMenuRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRelatoriosActionPerformed(evt);
+            }
+        });
 
-        jMenuItem2.setText("jMenuItem2");
+        jMenuItem5.setText("Todos Empréstimos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenuRelatorios.add(jMenuItem5);
+
+        jMenuItem2.setText("Ferramentas e Gastos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenuRelatorios.add(jMenuItem2);
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenuRelatorios.add(jMenuItem3);
-
-        jMenuItem4.setText("jMenuItem4");
-        jMenuRelatorios.add(jMenuItem4);
+        jMenuItem6.setText("Ranking de Empréstimos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenuRelatorios.add(jMenuItem6);
 
         jMenuBar2.add(jMenuRelatorios);
 
@@ -196,6 +216,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
         objeto.setVisible(true);
     }//GEN-LAST:event_jGerenciarEmprestimoActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        RelatorioEmprestimo objeto = new RelatorioEmprestimo();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatoriosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuRelatoriosActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        RelatorioRankingEmprestimo objeto = new RelatorioRankingEmprestimo();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        RelatorioGastoFerramenta objeto = new RelatorioGastoFerramenta();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 /**
  * @param args the command line arguments
  */
@@ -258,8 +300,8 @@ public static void main(String args[]) {
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenuItem jMenuSair;
     // End of variables declaration//GEN-END:variables
