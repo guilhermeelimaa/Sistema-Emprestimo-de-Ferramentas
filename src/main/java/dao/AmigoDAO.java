@@ -35,7 +35,7 @@ public class AmigoDAO {
 
     public Connection getConexao() {
 
-        Connection connection = null;  
+        Connection connection = null;
 
         try {
 
@@ -62,7 +62,7 @@ public class AmigoDAO {
             return connection;
 
         } catch (ClassNotFoundException e) {  // Driver não foi encontrado
-            System.out.println("O driver nao foi encontrado. " + e.getMessage() );
+            System.out.println("O driver nao foi encontrado. " + e.getMessage());
             return null;
 
         } catch (SQLException e) {
@@ -70,16 +70,17 @@ public class AmigoDAO {
             return null;
         }
     }
+
     // Retorna a Lista de Amigos
     public ArrayList getMinhaLista() {
-        
+
         MinhaLista.clear(); // Limpa nosso ArrayList
 
         try {
             Statement stmt = this.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigo");
             while (res.next()) {
-                
+
                 int id = res.getInt("id");
                 String nome = res.getString("nome");
                 String telefone = res.getString("telefone");
@@ -122,11 +123,11 @@ public class AmigoDAO {
         try {
             Statement stmt = this.getConexao().createStatement();
             stmt.executeUpdate("DELETE FROM tb_amigo WHERE id = " + id);
-            stmt.close();            
-            
+            stmt.close();
+
         } catch (SQLException erro) {
         }
-        
+
         return true;
     }
 
@@ -140,7 +141,7 @@ public class AmigoDAO {
             stmt.setInt(3, objeto.getId());
             stmt.setString(1, objeto.getNome());
             stmt.setString(2, objeto.getTelefone());
-            
+
             stmt.execute();
             stmt.close();
 
@@ -152,11 +153,23 @@ public class AmigoDAO {
 
     }
 
+    // Adicione este método na classe AmigoDAO
+    public boolean amigoExiste(String nomeAmigo) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM tb_amigo WHERE nome = ?";
+        try (Connection con = getConexao(); PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, nomeAmigo);
+            try (ResultSet rs = stmt.executeQuery()) {
+                rs.next();
+                return rs.getInt(1) > 0;
+            }
+        }
+    }
+
     public Amigo carregaAmigo(int id) {
-        
+
         Amigo objeto = new Amigo();
         objeto.setId(id);
-        
+
         try {
             Statement stmt = this.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigo WHERE id = " + id);
@@ -165,8 +178,8 @@ public class AmigoDAO {
             objeto.setNome(res.getString("nome"));
             objeto.setTelefone(res.getString("telefone"));
 
-            stmt.close();            
-            
+            stmt.close();
+
         } catch (SQLException erro) {
         }
         return objeto;

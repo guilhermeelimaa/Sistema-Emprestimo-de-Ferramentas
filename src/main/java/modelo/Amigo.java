@@ -51,6 +51,7 @@ public class Amigo extends Ferramenta {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+    
 
     @Override
     public String toString() {
@@ -63,12 +64,14 @@ public class Amigo extends Ferramenta {
     public ArrayList<Amigo> getMinhaLista() {
         return dao.getMinhaLista();
     }
+    
 
     public boolean InsertAmigoBD(int id, String nome, String telefone) throws SQLException {
         Amigo objeto = new Amigo(id, nome, telefone);
         dao.InsertAmigoBD(objeto);
         return true;
     }
+    
 
     public boolean InsertAmigoBD(String nome, String telefone) throws SQLException {
         int id = this.maiorID() + 1;
@@ -94,4 +97,5 @@ public class Amigo extends Ferramenta {
         return dao.maiorID();
     }   
 }
+
 
