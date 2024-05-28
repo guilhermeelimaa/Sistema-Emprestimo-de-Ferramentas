@@ -10,27 +10,25 @@ public class Ferramenta {
     private String nome;
     private String marca;
     private Double custo;
+    private int quantidade;
+    private java.sql.Date dataCadastro;
     private final FerramentaDAO dao;
 
     public Ferramenta() {
         this.dao = new FerramentaDAO();
     }
 
-    public Ferramenta(int id, String nome, String marca, Double custo) {
+    public Ferramenta(int id, String nome, String marca, Double custo, int quantidade, java.sql.Date dataCadastro) {
         this.id = id;
         this.nome = nome;
         this.marca = marca;
         this.custo = custo;
+        this.quantidade = quantidade;
+        this.dataCadastro = dataCadastro;
         this.dao = new FerramentaDAO();
     }
 
-    public Ferramenta(int id, String nome, String marca, double custo) {
-        this.id = id;
-        this.nome = nome;
-        this.marca = marca;
-        this.custo = custo;
-        this.dao = new FerramentaDAO();
-    }
+    // Getters e Setters
 
     public int getId() {
         return id;
@@ -56,12 +54,28 @@ public class Ferramenta {
         this.marca = marca;
     }
 
-    public double getCusto() {
+    public Double getCusto() {
         return custo;
     }
 
     public void setCusto(Double custo) {
         this.custo = custo;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public java.sql.Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(java.sql.Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     @Override
@@ -70,24 +84,27 @@ public class Ferramenta {
                 + "\n Nome: " + this.getNome()
                 + "\n Marca: " + this.getMarca()
                 + "\n Custo: " + this.getCusto()
+                + "\n Quantidade: " + this.getQuantidade()
+                + "\n Data de Cadastro: " + this.getDataCadastro()
                 + "\n -----------";
     }
 
-    public ArrayList getMinhaLista() {
-
+    public ArrayList<Ferramenta> getMinhaLista() {
         return dao.getMinhaLista();
     }
 
-    public boolean InsertFerramentaBD(String nome, String marca, double custo) throws SQLException {
-        int id = this.maiorID() + 1;
-        Ferramenta objeto = new Ferramenta(id, nome, marca, custo);
+    public boolean InsertFerramentaBD(String nome, String marca, double custo) {
+        Ferramenta objeto = new Ferramenta(0, nome, marca, custo, 1, new java.sql.Date(System.currentTimeMillis()));
 
-        dao.InsertFerramentaBD(objeto);
-        return true;
+        try {
+            return dao.InsertFerramentaBD(objeto);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean DeleteFerramentaBD(int id) {
-
         dao.DeleteFerramentaBD(id);
         return true;
     }
@@ -96,13 +113,11 @@ public class Ferramenta {
         return dao.UpdateFerramentaBD(id, nome, marca, custo);
     }
 
-    public Amigo carregaFerramenta(int id) {
-        dao.carregaFerramenta(id);
-        return null;
+    public Ferramenta carregaFerramenta(int id) {
+        return dao.carregaFerramenta(id);
     }
 
     public int maiorID() throws SQLException {
-
         return dao.maiorID();
     }
 }

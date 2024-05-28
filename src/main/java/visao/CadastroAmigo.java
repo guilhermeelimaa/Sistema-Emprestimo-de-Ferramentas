@@ -143,7 +143,7 @@ public class CadastroAmigo extends javax.swing.JFrame {
             this.JTFTelefone.setText("");
         }
 
-        System.out.println(this.objetoamigo.getMinhaLista().toString());
+        System.out.println(this.objetoamigo.getMinhaListaDeAmigos().toString());
     } catch (Mensagens erro) {
         JOptionPane.showMessageDialog(null, erro.getMessage());
     } catch (NumberFormatException erro2) {

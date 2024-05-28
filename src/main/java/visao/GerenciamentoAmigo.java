@@ -30,7 +30,7 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableAmigo.getModel();
         modelo.setNumRows(0); //Posiciona na primeira linha da tabela
 //Carrega a lista de objetos aluno
-        ArrayList<Amigo> minhalista = objetoamigo.getMinhaLista();
+        ArrayList<Amigo> minhalista = objetoamigo.getMinhaListaDeAmigos();
         for (Amigo a : minhalista) {
             modelo.addRow(new Object[]{
                 a.getId(),
@@ -201,7 +201,7 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Amigo Alterado com Sucesso!");
             }
 
-            System.out.println(this.objetoamigo.getMinhaLista().toString());
+            System.out.println(this.objetoamigo.getMinhaListaDeAmigos().toString());
         } catch (Mensagens erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
@@ -235,7 +235,7 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Amigo Apagado com Sucesso!");
                 }
             }
-            System.out.println(this.objetoamigo.getMinhaLista().toString());
+            System.out.println(this.objetoamigo.getMinhaListaDeAmigos().toString());
         } catch (Mensagens erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } finally {

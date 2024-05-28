@@ -4,15 +4,15 @@ import java.util.*;
 import DAO.AmigoDAO;
 import java.sql.SQLException;
 
-public class Amigo extends Ferramenta {
+public class Amigo {
 
     private int id;
     private String nome;
     private String telefone;
-    private final AmigoDAO dao; 
+    private final AmigoDAO dao;
 
     public Amigo() {
-        this.dao = new AmigoDAO(); 
+        this.dao = new AmigoDAO();
     }
 
     public Amigo(String nome, String telefone) {
@@ -25,9 +25,11 @@ public class Amigo extends Ferramenta {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
-        this.dao = new AmigoDAO(); 
+        this.dao = new AmigoDAO();
     }
-    
+
+    // Getters e Setters
+
     public int getId() {
         return id;
     }
@@ -51,27 +53,24 @@ public class Amigo extends Ferramenta {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
 
     @Override
     public String toString() {
         return "\n ID: " + this.getId()
                 + "\n Nome: " + this.getNome()
-                + "\n Telefone: " + this.getTelefone()              
+                + "\n Telefone: " + this.getTelefone()
                 + "\n -----------";
     }
 
-    public ArrayList<Amigo> getMinhaLista() {
+    public ArrayList<Amigo> getMinhaListaDeAmigos() {
         return dao.getMinhaLista();
     }
-    
 
     public boolean InsertAmigoBD(int id, String nome, String telefone) throws SQLException {
         Amigo objeto = new Amigo(id, nome, telefone);
         dao.InsertAmigoBD(objeto);
         return true;
     }
-    
 
     public boolean InsertAmigoBD(String nome, String telefone) throws SQLException {
         int id = this.maiorID() + 1;
@@ -95,7 +94,5 @@ public class Amigo extends Ferramenta {
 
     public int maiorID() throws SQLException {
         return dao.maiorID();
-    }   
+    }
 }
-
-

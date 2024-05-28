@@ -49,35 +49,28 @@ public class RelatorioRankingEmprestimo extends JFrame {
     private void carregarEmprestimos() {
         Emprestimo emprestimo = new Emprestimo();
         emprestimos = emprestimo.getMinhaLista();
-        
+
         // Contagem de empréstimos por pessoa
         Map<String, Integer> countMap = new HashMap<>();
         for (Emprestimo emp : emprestimos) {
             String amigo = emp.getAmigo();
             countMap.put(amigo, countMap.getOrDefault(amigo, 0) + 1);
         }
-        
+
         // Ordenação decrescente da contagem de empréstimos
-        Collections.sort(emprestimos, (emp1, emp2) -> {
-            int count1 = countMap.getOrDefault(emp1.getAmigo(), 0);
-            int count2 = countMap.getOrDefault(emp2.getAmigo(), 0);
-            return Integer.compare(count2, count1);
-        });
+        ArrayList<Map.Entry<String, Integer>> sortedAmigos = new ArrayList<>(countMap.entrySet());
+        sortedAmigos.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
 
         // Criando o modelo da tabela
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Nome");
-        model.addColumn("Ferramenta");
-        model.addColumn("Data Aquisição");
-        model.addColumn("Data Devolução");
+        model.addColumn("Total Empréstimos");
 
         // Preenchendo a tabela com os dados dos empréstimos
-        for (Emprestimo emp : emprestimos) {
+        for (Map.Entry<String, Integer> entry : sortedAmigos) {
             Object[] rowData = {
-                emp.getAmigo(),
-                emp.getFerramenta(),
-                emp.getDataaquisicao(),
-                emp.getDataentrega()
+                entry.getKey(),
+                entry.getValue()
             };
             model.addRow(rowData);
         }
