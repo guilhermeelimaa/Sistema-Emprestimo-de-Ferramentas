@@ -51,7 +51,7 @@ public class CadastroAmigo extends javax.swing.JFrame {
             }
         });
 
-        JBVoltar.setText("Cancelar");
+        JBVoltar.setText("Voltar");
         JBVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBVoltarActionPerformed(evt);
@@ -84,7 +84,7 @@ public class CadastroAmigo extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(JTFNomeA, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                             .addComponent(JTFTelefone))))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

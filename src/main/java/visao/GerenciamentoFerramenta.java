@@ -82,7 +82,7 @@ public class GerenciamentoFerramenta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableFerramenta);
 
-        JBCancelar.setText("Cancelar");
+        JBCancelar.setText("Voltar");
         JBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBCancelarActionPerformed(evt);
@@ -134,7 +134,7 @@ public class GerenciamentoFerramenta extends javax.swing.JFrame {
                         .addComponent(JBCancelar)
                         .addGap(73, 73, 73)
                         .addComponent(JBAlterar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(JBApagar)
                 .addGap(29, 29, 29))
         );

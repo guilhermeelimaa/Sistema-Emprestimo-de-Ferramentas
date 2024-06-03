@@ -62,7 +62,7 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Data Entrega:");
 
-        JBCancelar.setText("Cancelar");
+        JBCancelar.setText("Voltar");
         JBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBCancelarActionPerformed(evt);

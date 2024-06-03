@@ -98,7 +98,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Data Entrega:");
 
-        JBCancelar.setText("Cancelar");
+        JBCancelar.setText("Voltar");
         JBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBCancelarActionPerformed(evt);
@@ -146,7 +146,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
                         .addComponent(JBCancelar)
                         .addGap(63, 63, 63)
                         .addComponent(JBAlterar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                         .addComponent(JBApagar)
                         .addGap(36, 36, 36))))
         );
