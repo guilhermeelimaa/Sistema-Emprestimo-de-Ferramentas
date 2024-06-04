@@ -41,6 +41,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         model.addColumn("Ferramenta");
         model.addColumn("Data Aquisição");
         model.addColumn("Data Devolução");
+        model.addColumn("Status");
 
         /**
          * Preenchendo a tabela com os dados dos empréstimos
@@ -56,9 +57,10 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
                 emp.getDataaquisicao(), /**
                  * Data de aquisição
                  */
-                emp.getDataentrega() /**
-             * Data de entrega
-             */
+                emp.getDataentrega(), /**
+                * Data de entrega
+                */
+                emp.getStatus()
             };
             model.addRow(rowData);
         }
@@ -108,11 +110,11 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Amigo", "Ferramenta", "Data Aquisição", "Data Entrega"
+                "Amigo", "Ferramenta", "Data Aquisição", "Data Entrega", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -107,7 +107,8 @@ public class EmprestimoDAO {
                 String ferramenta = res.getString("ferramenta");
                 String dataaquisicao = res.getString("dataaquisicao");
                 String dataentrega = res.getString("dataentrega");
-                Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega);
+                String status = res.getString("status");
+                Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega, status);
                 MinhaLista.add(objeto);
             }
             stmt.close();
@@ -125,7 +126,7 @@ public class EmprestimoDAO {
      * @return true se a inserção for bem-sucedida, false caso contrário.
      */
     public boolean InsertEmprestimoBD(Emprestimo objeto) {
-        String sql = "INSERT INTO tb_emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO tb_emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega, status) VALUES(?,?,?,?,?,?)";
 
         try {
             PreparedStatement stmt = this.getConexao().prepareStatement(sql);
@@ -135,6 +136,7 @@ public class EmprestimoDAO {
             stmt.setString(3, objeto.getFerramenta());
             stmt.setString(4, objeto.getDataaquisicao());
             stmt.setString(5, objeto.getDataentrega());
+            stmt.setString(6, objeto.getStatus());
 
             stmt.execute();
             stmt.close();
@@ -143,6 +145,36 @@ public class EmprestimoDAO {
         } catch (SQLException erro) {
             erro.printStackTrace();
             throw new RuntimeException(erro);
+        }
+    }
+
+    public boolean updateStatusEmprestimoBD(int id, String status, String dataEntrega) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = this.getConexao();
+            String sql = "UPDATE tb_emprestimo SET status = ?, dataentrega = ? WHERE id = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, status);
+            stmt.setString(2, dataEntrega);
+            stmt.setInt(3, id);
+
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -179,7 +211,8 @@ public class EmprestimoDAO {
             stmt.setString(2, objeto.getFerramenta());
             stmt.setString(3, objeto.getDataaquisicao());
             stmt.setString(4, objeto.getDataentrega());
-            stmt.setInt(5, objeto.getId());
+            stmt.setString(5, objeto.getStatus());
+            stmt.setInt(6, objeto.getId());
 
             stmt.execute();
             stmt.close();
@@ -209,6 +242,7 @@ public class EmprestimoDAO {
                 objeto.setFerramenta(res.getString("ferramenta"));
                 objeto.setDataaquisicao(res.getString("dataaquisicao"));
                 objeto.setDataentrega(res.getString("dataentrega"));
+                objeto.setStatus(res.getString("status"));
             }
             stmt.close();
         } catch (SQLException erro) {

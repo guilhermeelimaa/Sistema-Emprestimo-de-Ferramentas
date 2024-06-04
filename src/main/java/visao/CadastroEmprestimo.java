@@ -163,6 +163,7 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
             String ferramentaNome = "";
             String dataaquisicao = "";
             String dataentrega = "";
+            String status = "aberto";
 
             if (this.JTFAmigo.getText().length() < 2) {
                 throw new Mensagens("Nome do amigo deve conter ao menos 2 caracteres.");
@@ -212,7 +213,7 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
             /**
              * Insere o empréstimo no banco de dados
              */
-            if (this.objetoemprestimo.InsertEmprestimoBD(id, amigo, ferramentaNome, dataaquisicao, dataentrega)) {
+            if (this.objetoemprestimo.InsertEmprestimoBD(id, amigo, ferramentaNome, dataaquisicao, dataentrega, status)) {
                 JOptionPane.showMessageDialog(rootPane, "Empréstimo cadastrado com sucesso!");
 
                 this.JTFAmigo.setText("");

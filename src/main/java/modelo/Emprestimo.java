@@ -11,6 +11,7 @@ public class Emprestimo {
     private String ferramenta;
     private String dataaquisicao;
     private String dataentrega;
+    private String status;
     private final EmprestimoDAO dao;
 
     /**
@@ -28,13 +29,15 @@ public class Emprestimo {
      * @param ferramenta O nome da ferramenta.
      * @param dataaquisicao A data de aquisição.
      * @param dataentrega A data de entrega.
+     * @param status O status do empréstimo.
      */
-    public Emprestimo(int id, String amigo, String ferramenta, String dataaquisicao, String dataentrega) {
+    public Emprestimo(int id, String amigo, String ferramenta, String dataaquisicao, String dataentrega, String status) {
         this.id = id;
         this.amigo = amigo;
         this.ferramenta = ferramenta;
         this.dataaquisicao = dataaquisicao;
         this.dataentrega = dataentrega;
+        this.status = status;
         this.dao = new EmprestimoDAO();
     }
 
@@ -81,12 +84,21 @@ public class Emprestimo {
         this.dataentrega = dataentrega;
     }
 
+    public String getStatus() {
+        return status; 
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "\n Amigo: " + this.getAmigo()
                 + "\n Ferramenta: " + this.getFerramenta()
                 + "\n Data Aquisição: " + this.getDataaquisicao()
                 + "\n Data Entrega: " + this.getDataentrega()
+                + "\n Status: " + this.getStatus()
                 + "\n -----------";
     }
 
@@ -107,11 +119,12 @@ public class Emprestimo {
      * @param ferramenta O nome da ferramenta.
      * @param dataaquisicao A data de aquisição.
      * @param dataentrega A data de entrega.
+     * @param status O status do empréstimo.
      * @return true se a inserção for bem-sucedida, false caso contrário.
      * @throws SQLException se ocorrer um erro ao acessar o banco de dados.
      */
-    public boolean InsertEmprestimoBD(int id, String amigo, String ferramenta, String dataaquisicao, String dataentrega) throws SQLException {
-        Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega);
+    public boolean InsertEmprestimoBD(int id, String amigo, String ferramenta, String dataaquisicao, String dataentrega, String status) throws SQLException {
+        Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega, status);
         dao.InsertEmprestimoBD(objeto);
         return true;
     }
@@ -135,10 +148,11 @@ public class Emprestimo {
      * @param ferramenta O nome da ferramenta.
      * @param dataaquisicao A data de aquisição.
      * @param dataentrega A data de entrega.
+     * @param status O status do empréstimo.
      * @return true se a atualização for bem-sucedida, false caso contrário.
      */
-    public boolean UpdateEmprestimoBD(int id, String amigo, String ferramenta, String dataaquisicao, String dataentrega) {
-        Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega);
+    public boolean UpdateEmprestimoBD(int id, String amigo, String ferramenta, String dataaquisicao, String dataentrega, String status) {
+        Emprestimo objeto = new Emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega, status);
         dao.UpdateEmprestimoBD(objeto);
         return true;
     }
@@ -161,5 +175,9 @@ public class Emprestimo {
      */
     public int maiorID() throws SQLException {
         return dao.maiorID();
+    }
+
+    public boolean updateStatusEmprestimoBD(int id, String status, String dataEntrega) {
+        return dao.updateStatusEmprestimoBD(id, status, dataEntrega);
     }
 }

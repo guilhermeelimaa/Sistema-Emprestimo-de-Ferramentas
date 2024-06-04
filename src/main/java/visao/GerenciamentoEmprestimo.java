@@ -33,7 +33,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
         /**
          * Posiciona na primeira linha da tabela
          */
-        
+
         /**
          * Carrega a lista de objetos aluno
          */
@@ -71,6 +71,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
         JBCancelar = new javax.swing.JButton();
         JBApagar = new javax.swing.JButton();
         JBAlterar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciamento Emprestimo");
@@ -132,6 +133,13 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Finalizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,7 +167,9 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
                         .addComponent(JBCancelar)
                         .addGap(63, 63, 63)
                         .addComponent(JBAlterar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(JBApagar)
                         .addGap(36, 36, 36))))
         );
@@ -187,7 +197,8 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBCancelar)
                     .addComponent(JBApagar)
-                    .addComponent(JBAlterar))
+                    .addComponent(JBAlterar)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -231,6 +242,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
             String ferramenta = "";
             String dataaquisicao = "";
             String dataentrega = "";
+            String status = "";
             if (this.JTFAmigo.getText().length() < 2) {
                 throw new Mensagens("Nome do amigo deve conter ao menos 2 caracteres.");
             } else {
@@ -257,7 +269,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
                 id = Integer.parseInt(this.jTableEmprestimo.getValueAt(this.jTableEmprestimo.getSelectedRow(), 0).toString());
             }
 
-            if (this.objetoemprestimo.UpdateEmprestimoBD(id, amigo, ferramenta, dataaquisicao, dataentrega)) {
+            if (this.objetoemprestimo.UpdateEmprestimoBD(id, amigo, ferramenta, dataaquisicao, dataentrega, status)) {
 
                 this.JTFAmigo.setText("");
                 this.JTFFerramenta.setText("");
@@ -311,6 +323,30 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JBApagarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            int id = 0;
+            if (this.jTableEmprestimo.getSelectedRow() == -1) {
+                throw new Mensagens("Primeiro Selecione um Emprestimo para Finalizar");
+            } else {
+                id = Integer.parseInt(this.jTableEmprestimo.getValueAt(this.jTableEmprestimo.getSelectedRow(), 0).toString());
+            }
+
+            String status = "finalizado";
+            String dataEntrega = JTFDataEntrega.getText();
+
+            if (objetoemprestimo.updateStatusEmprestimoBD(id, status, dataEntrega)) {
+                JOptionPane.showMessageDialog(rootPane, "Status do Emprestimo Alterado para Finalizado com Sucesso!");
+            }
+            carregaTabela();
+        } catch (Mensagens erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -354,6 +390,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
     private javax.swing.JTextField JTFDataAquisicao;
     private javax.swing.JTextField JTFDataEntrega;
     private javax.swing.JTextField JTFFerramenta;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
