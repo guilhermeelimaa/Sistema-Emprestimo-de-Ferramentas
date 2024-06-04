@@ -1,25 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package Principal;
+
 import visao.MenuPrincipal;
+
 /**
- *
- * @author User
+ * Classe principal que inicia a aplicação.
  */
 public class Principal {
 
     /**
-     * @param args the command line arguments
+     * Método principal que inicia a aplicação.
+     *
+     * @param args Os argumentos da linha de comando (não utilizados neste
+     * caso).
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        /**
+         * Cria uma instância do menu principal
+         */
         MenuPrincipal objetotela = new MenuPrincipal();
-        // Torna a janela visível
+        /**
+         * Torna a janela visível
+         */
         objetotela.setVisible(true);
-        
-                
     }
-    
+
 }

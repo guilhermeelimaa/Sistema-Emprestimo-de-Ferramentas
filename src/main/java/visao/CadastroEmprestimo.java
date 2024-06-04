@@ -18,6 +18,9 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
     private AmigoDAO amigoDAO;
     private FerramentaDAO ferramentaDAO;
 
+    /**
+     * Cria uma nova instância de CadastroEmprestimo.
+     */
     public CadastroEmprestimo() {
         initComponents();
         this.objetoemprestimo = new Emprestimo();
@@ -140,10 +143,15 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
-        // TODO add your handling code here:
+
+        /**
+         * Fecha a janela atual e retorna ao MenuPrincipal
+         */
         dispose();
         MenuPrincipal objetotela = new MenuPrincipal();
-        // Torna a janela visível
+        /**
+         * Torna a janela visível
+         */
         objetotela.setVisible(true);
     }//GEN-LAST:event_JBCancelarActionPerformed
 
@@ -176,24 +184,34 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
                 dataentrega = this.JTFDataEntrega.getText();
             }
 
-            // Busca a ferramenta pelo nome
+            /**
+             * Busca a ferramenta pelo nome
+             */
             Ferramenta ferramenta = ferramentaDAO.buscarFerramentaPorNome(ferramentaNome);
 
-            // Verifica se a ferramenta foi encontrada
+            /**
+             * Verifica se a ferramenta foi encontrada
+             */
             if (ferramenta == null) {
                 throw new Mensagens("A ferramenta selecionada não foi encontrada no banco de dados.");
             }
 
-            // Verifica se há pelo menos uma unidade da ferramenta disponível
+            /**
+             * Verifica se há pelo menos uma unidade da ferramenta disponível
+             */
             if (ferramenta.getQuantidade() <= 0) {
                 throw new Mensagens("Não há unidades disponíveis da ferramenta selecionada.");
             }
 
-            // Atualiza a quantidade da ferramenta, subtraindo uma unidade
+            /**
+             * Atualiza a quantidade da ferramenta, subtraindo uma unidade
+             */
             ferramenta.setQuantidade(ferramenta.getQuantidade() - 1);
             ferramentaDAO.atualizarQuantidadeFerramenta(ferramenta);
 
-            // Insere o empréstimo no banco de dados
+            /**
+             * Insere o empréstimo no banco de dados
+             */
             if (this.objetoemprestimo.InsertEmprestimoBD(id, amigo, ferramentaNome, dataaquisicao, dataentrega)) {
                 JOptionPane.showMessageDialog(rootPane, "Empréstimo cadastrado com sucesso!");
 
@@ -201,7 +219,9 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
                 this.JTFDataAquisicao.setText("");
                 this.JTFDataEntrega.setText("");
 
-                // Atualiza o ComboBox de ferramentas
+                /**
+                 * Atualiza o ComboBox de ferramentas
+                 */
                 carregarFerramentas();
             }
 
@@ -210,8 +230,10 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
+
         } catch (SQLException ex) {
-            Logger.getLogger(CadastroEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroEmprestimo.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_JBCadastrarActionPerformed
     private void carregarFerramentas() {
@@ -219,7 +241,9 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
         JCBFerramenta.setModel(model);
     }
 
-    // Método para definir a data de aquisição como a data atual
+    /**
+     * Método para definir a data de aquisição como a data atual
+     */
     private void setDataAquisicaoAtual() {
         LocalDate dataAtual = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -240,16 +264,24 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEmprestimo.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEmprestimo.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEmprestimo.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroEmprestimo.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

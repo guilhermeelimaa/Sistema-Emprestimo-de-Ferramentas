@@ -29,8 +29,14 @@ public class GerenciamentoFerramenta extends javax.swing.JFrame {
 
     public void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableFerramenta.getModel();
-        modelo.setNumRows(0); //Posiciona na primeira linha da tabela
-//Carrega a lista de objetos aluno
+        modelo.setNumRows(0);
+        /**
+         * Posiciona na primeira linha da tabela
+         */
+        
+        /**
+         * Carrega a lista de objetos aluno
+         */
         ArrayList<Ferramenta> minhalista = objetoferramenta.getMinhaLista();
         for (Ferramenta a : minhalista) {
             modelo.addRow(new Object[]{
@@ -174,10 +180,14 @@ public class GerenciamentoFerramenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
-        //Libera todos os recurso da interface gráfica
+        /**
+         * Libera todos os recurso da interface gráfica
+         */
         dispose();
         MenuPrincipal objetotela = new MenuPrincipal();
-        // Torna a janela visível
+        /**
+         * Torna a janela visível
+         */
         objetotela.setVisible(true);
     }//GEN-LAST:event_JBCancelarActionPerformed
 
@@ -205,7 +215,9 @@ public class GerenciamentoFerramenta extends javax.swing.JFrame {
             String marca = "";
             double custo = 0;
 
-            // Verifica se os campos foram preenchidos corretamente
+            /**
+             * Verifica se os campos foram preenchidos corretamente
+             */
             if (this.JTFNome.getText().length() < 2) {
                 throw new Mensagens("Nome da ferramenta deve conter ao menos 2 caracteres.");
             } else {
@@ -222,7 +234,9 @@ public class GerenciamentoFerramenta extends javax.swing.JFrame {
                 custo = Double.parseDouble(this.JTFCusto.getText());
             }
 
-            // Verifica se uma ferramenta foi selecionada na tabela
+            /**
+             * Verifica se uma ferramenta foi selecionada na tabela
+             */
             if (this.jTableFerramenta.getSelectedRow() == -1) {
                 throw new Mensagens("Por favor, selecione uma ferramenta para alterar.");
             } else {
@@ -238,7 +252,9 @@ public class GerenciamentoFerramenta extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Falha ao alterar a ferramenta.");
             }
 
-            // Recarrega a tabela após a alteração
+            /**
+             * Recarrega a tabela após a alteração
+             */
             carregaTabela();
         } catch (Mensagens erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());

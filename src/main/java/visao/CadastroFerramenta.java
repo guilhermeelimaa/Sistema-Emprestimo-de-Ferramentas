@@ -121,7 +121,9 @@ public class CadastroFerramenta extends javax.swing.JFrame {
             Ferramenta ferramenta = ferramentaDAO.buscarFerramentaPorNome(nome);
 
             if (ferramenta == null) {
-                // Se a ferramenta não existe, cria uma nova com quantidade 1
+                /**
+                 * Se a ferramenta não existe, cria uma nova com quantidade 1
+                 */
                 Ferramenta novaFerramenta = new Ferramenta(0, nome, marca, custo, 1, new Date(System.currentTimeMillis()));
                 if (ferramentaDAO.InsertFerramentaBD(novaFerramenta)) {
                     JOptionPane.showMessageDialog(this, "Ferramenta cadastrada com sucesso!");
@@ -132,7 +134,9 @@ public class CadastroFerramenta extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Erro ao cadastrar ferramenta.");
                 }
             } else {
-                // Se a ferramenta existe, atualiza a quantidade
+                /**
+                 * Se a ferramenta existe, atualiza a quantidade
+                 */
                 int novaQuantidade = ferramenta.getQuantidade() + 1;
                 ferramenta.setQuantidade(novaQuantidade);
                 if (ferramentaDAO.atualizarQuantidadeFerramenta(ferramenta)) {
@@ -156,7 +160,9 @@ public class CadastroFerramenta extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         MenuPrincipal objetotela = new MenuPrincipal();
-        // Torna a janela visível
+        /**
+         * Torna a janela visível
+         */
         objetotela.setVisible(true);
     }//GEN-LAST:event_JBCancelarActionPerformed
 

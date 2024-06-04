@@ -29,8 +29,14 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
 
     public void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableAmigo.getModel();
-        modelo.setNumRows(0); //Posiciona na primeira linha da tabela
-//Carrega a lista de objetos aluno
+        modelo.setNumRows(0);
+        /**
+         * Posiciona na primeira linha da tabela
+         */
+        
+        /**
+         * Carrega a lista de objetos aluno
+         */
         ArrayList<Amigo> minhalista = objetoamigo.getMinhaListaDeAmigos();
         for (Amigo a : minhalista) {
             modelo.addRow(new Object[]{
@@ -163,10 +169,14 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
-        //Libera todos os recurso da interface gráfica
-       dispose();
-       MenuPrincipal objetotela = new MenuPrincipal();
-        // Torna a janela visível
+        /**
+         * Libera todos os recurso da interface gráfica
+         */
+        dispose();
+        MenuPrincipal objetotela = new MenuPrincipal();
+        /**
+         * Torna a janela visível
+         */
         objetotela.setVisible(true);
 
     }//GEN-LAST:event_JBCancelarActionPerformed

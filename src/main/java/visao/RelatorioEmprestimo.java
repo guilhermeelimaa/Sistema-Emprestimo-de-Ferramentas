@@ -17,9 +17,13 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
 
     public RelatorioEmprestimo() {
         initComponents();
-        // Carrega os empréstimos após a inicialização da tabela
+        /**
+         * Carrega os empréstimos após a inicialização da tabela
+         */
         carregarEmprestimos();
-        // Configura o JFrame
+        /**
+         * Configura o JFrame
+         */
         pack();
         setVisible(true);
         setTitle("Relatório de Empréstimos");
@@ -29,34 +33,54 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         Emprestimo emprestimo = new Emprestimo();
         emprestimos = emprestimo.getMinhaLista();
 
-        // Criando o modelo da tabela
+        /**
+         * Criando o modelo da tabela
+         */
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Nome");
         model.addColumn("Ferramenta");
         model.addColumn("Data Aquisição");
         model.addColumn("Data Devolução");
 
-        // Preenchendo a tabela com os dados dos empréstimos
+        /**
+         * Preenchendo a tabela com os dados dos empréstimos
+         */
         for (Emprestimo emp : emprestimos) {
             Object[] rowData = {
-                emp.getAmigo(), // obtendo o nome do amigo
-                emp.getFerramenta(), // obtendo o nome da ferramenta
-                emp.getDataaquisicao(), // data de aquisição
-                emp.getDataentrega() // data de entrega
+                emp.getAmigo(), /**
+                 * Obtendo o nome do amigo
+                 */
+                emp.getFerramenta(), /**
+                 * Obtendo o nome da ferramenta
+                 */
+                emp.getDataaquisicao(), /**
+                 * Data de aquisição
+                 */
+                emp.getDataentrega() /**
+             * Data de entrega
+             */
             };
             model.addRow(rowData);
         }
 
-        // Definindo o modelo da tabela
+        /**
+         * Definindo o modelo da tabela
+         */
         tbrelatorioemprestimo.setModel(model);
 
-        // Criando a tabela usando o modelo
+        /**
+         * Criando a tabela usando o modelo
+         */
         JTable tbrelatorioemprestimo = new JTable(model);
 
-        // Criando um JScrollPane para a tabela
+        /**
+         * Criando um JScrollPane para a tabela
+         */
         jScrollPane1 = new JScrollPane(tbrelatorioemprestimo);
 
-        // Adicionando o JScrollPane ao JFrame
+        /**
+         * Adicionando o JScrollPane ao JFrame
+         */
         getContentPane().add(jScrollPane1, BorderLayout.CENTER);
     }
 

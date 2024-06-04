@@ -6,8 +6,17 @@ import java.util.ArrayList;
 
 public class FerramentaDAO {
 
+    /**
+     * Lista estática que armazena objetos da classe Ferramenta.
+     */
     public static ArrayList<Ferramenta> MinhaLista = new ArrayList<>();
 
+    /**
+     * Método para obter o maior ID da tabela 'tb_ferramenta'.
+     *
+     * @return O maior ID presente na tabela 'tb_ferramenta'.
+     * @throws SQLException se ocorrer um erro ao acessar o banco de dados.
+     */
     public int maiorID() throws SQLException {
         int maiorID = 0;
         try {
@@ -23,17 +32,36 @@ public class FerramentaDAO {
         return maiorID;
     }
 
+    /**
+     * Método para obter uma conexão com o banco de dados.
+     *
+     * @return Uma conexão com o banco de dados.
+     */
     public Connection getConexao() {
         Connection connection = null;
         try {
+            /**
+             * Carregando o JDBC Driver
+             */
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
+
+            /**
+             * Configurando a conexão
+             */
             String server = "localhost";
+            /**
+             * Caminho do MySQL
+             */
             String database = "db_softwarea3";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
             String password = "root";
             connection = DriverManager.getConnection(url, user, password);
+
+            /**
+             * Testando a conexão
+             */
             if (connection != null) {
                 System.out.println("Status: Conectado!");
             } else {
@@ -41,6 +69,9 @@ public class FerramentaDAO {
             }
             return connection;
         } catch (ClassNotFoundException e) {
+            /**
+             * Driver não foi encontrado
+             */
             System.out.println("O driver não foi encontrado. " + e.getMessage());
             return null;
         } catch (SQLException e) {
@@ -49,6 +80,11 @@ public class FerramentaDAO {
         }
     }
 
+    /**
+     * Retorna a Lista de Ferramentas.
+     *
+     * @return A lista de ferramentas.
+     */
     public ArrayList<Ferramenta> getMinhaLista() {
         MinhaLista.clear();
         try {
@@ -72,6 +108,12 @@ public class FerramentaDAO {
         return MinhaLista;
     }
 
+    /**
+     * Insere uma ferramenta no banco de dados.
+     *
+     * @param objeto A ferramenta a ser inserida no banco de dados.
+     * @return true se a inserção for bem-sucedida, false caso contrário.
+     */
     public boolean InsertFerramentaBD(Ferramenta objeto) {
         String sql = "INSERT INTO tb_ferramenta(id, nome, marca ,custo, quantidade, dataCadastro) VALUES(?,?,?,?,?,?)";
         try {
@@ -90,6 +132,13 @@ public class FerramentaDAO {
         }
     }
 
+    /**
+     * Atualiza a quantidade de uma ferramenta no banco de dados.
+     *
+     * @param ferramenta A ferramenta a ser atualizada.
+     * @return true se a atualização for bem-sucedida, false caso contrário.
+     * @throws SQLException se ocorrer um erro ao acessar o banco de dados.
+     */
     public boolean atualizarQuantidadeFerramenta(Ferramenta ferramenta) throws SQLException {
         String sql = "UPDATE tb_ferramenta SET quantidade = ? WHERE nome = ?";
         try (Connection con = getConexao(); PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -99,6 +148,12 @@ public class FerramentaDAO {
         }
     }
 
+    /**
+     * Deleta uma ferramenta do banco de dados pelo ID.
+     *
+     * @param id O ID da ferramenta a ser excluída.
+     * @return true se a exclusão for bem-sucedida, false caso contrário.
+     */
     public boolean DeleteFerramentaBD(int id) {
         try {
             Statement stmt = this.getConexao().createStatement();
@@ -110,6 +165,15 @@ public class FerramentaDAO {
         return true;
     }
 
+    /**
+     * Atualiza os dados de uma ferramenta no banco de dados.
+     *
+     * @param id O ID da ferramenta a ser atualizada.
+     * @param nome O novo nome da ferramenta.
+     * @param marca A nova marca da ferramenta.
+     * @param custo O novo custo da ferramenta.
+     * @return true se a atualização for bem-sucedida, false caso contrário.
+     */
     public boolean UpdateFerramentaBD(int id, String nome, String marca, double custo) {
         try {
             Statement stmt = this.getConexao().createStatement();
@@ -121,6 +185,12 @@ public class FerramentaDAO {
         return true;
     }
 
+    /**
+     * Carrega uma ferramenta do banco de dados pelo ID.
+     *
+     * @param id O ID da ferramenta a ser carregada.
+     * @return O objeto Ferramenta carregado com os dados do banco de dados.
+     */
     public Ferramenta carregaFerramenta(int id) {
         Ferramenta objeto = new Ferramenta();
         objeto.setId(id);
@@ -141,24 +211,35 @@ public class FerramentaDAO {
         }
         return objeto;
     }
-    
-public ArrayList<String> listarNomesFerramentas() {
-    ArrayList<String> nomesFerramentas = new ArrayList<>();
-    try {
-        Statement stmt = this.getConexao().createStatement();
-        ResultSet res = stmt.executeQuery("SELECT nome FROM tb_ferramenta");
-        while (res.next()) {
-            String nome = res.getString("nome");
-            nomesFerramentas.add(nome);
+
+    /**
+     * Lista os nomes das ferramentas presentes no banco de dados.
+     *
+     * @return Um ArrayList contendo os nomes das ferramentas.
+     */
+    public ArrayList<String> listarNomesFerramentas() {
+        ArrayList<String> nomesFerramentas = new ArrayList<>();
+        try {
+            Statement stmt = this.getConexao().createStatement();
+            ResultSet res = stmt.executeQuery("SELECT nome FROM tb_ferramenta");
+            while (res.next()) {
+                String nome = res.getString("nome");
+                nomesFerramentas.add(nome);
+            }
+            stmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        stmt.close();
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        return nomesFerramentas;
     }
-    return nomesFerramentas;
-}
 
-
+    /**
+     * Busca uma ferramenta pelo nome no banco de dados.
+     *
+     * @param nome O nome da ferramenta a ser buscada.
+     * @return A ferramenta encontrada, ou null se não for encontrada.
+     * @throws SQLException se ocorrer um erro ao acessar o banco de dados.
+     */
     public Ferramenta buscarFerramentaPorNome(String nome) throws SQLException {
         String sql = "SELECT * FROM tb_ferramenta WHERE nome = ?";
         try (Connection con = getConexao(); PreparedStatement stmt = con.prepareStatement(sql)) {

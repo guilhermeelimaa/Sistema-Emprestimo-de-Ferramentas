@@ -17,6 +17,7 @@ import modelo.Ferramenta;
 public class RelatorioGastoFerramenta extends javax.swing.JFrame {
 
     private Ferramenta objetoferramenta;
+
     /**
      * Creates new form Ferramentas_e_Gastos
      */
@@ -25,30 +26,47 @@ public class RelatorioGastoFerramenta extends javax.swing.JFrame {
         this.objetoferramenta = new Ferramenta();
         this.carregaTabela();
         setTitle("Relatório de Gastos");
-        
-        // Adiciona um listener para o evento de fechamento da janela
+
+        /**
+         * Adiciona um listener para o evento de fechamento da janela
+         */
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // Em vez de fechar a aplicação, abre o menu principal
+                /**
+                 * Em vez de fechar a aplicação, abre o menu principal
+                 */
                 new MenuPrincipal().setVisible(true);
-                dispose(); // Fecha a tela atual
+                dispose();
+                /**
+                 * Fecha a tela atual
+                 */
             }
         });
     }
+
     public void carregaTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTable1.getModel();
-        modelo.setNumRows(0); //Posiciona na primeira linha da tabela
-        // Carrega a lista de objetos ferramenta
+        modelo.setNumRows(0);
+        /**
+         * Posiciona na primeira linha da tabela
+         */
+        /**
+         * Carrega a lista de objetos ferramenta
+         */
         ArrayList<Ferramenta> minhalista = objetoferramenta.getMinhaLista();
-        
-        // Calcula o custo total
+
+        /**
+         * Calcula o custo total
+         */
         double custoTotal = 0;
         for (Ferramenta a : minhalista) {
             custoTotal += a.getCusto();
         }
-        
-        // Preenche a tabela com os dados das ferramentas
+
+        /**
+         * Preenche a tabela com os dados das ferramentas
+         */
         for (int i = 0; i < minhalista.size(); i++) {
             Ferramenta a = minhalista.get(i);
             if (i == 0) {
@@ -56,18 +74,23 @@ public class RelatorioGastoFerramenta extends javax.swing.JFrame {
                     a.getId(),
                     a.getNome(),
                     a.getCusto(),
-                    custoTotal // Adiciona o custo total na primeira linha
+                    custoTotal /**
+                 * Adiciona o custo total na primeira linha
+                 */
                 });
             } else {
                 modelo.addRow(new Object[]{
                     a.getId(),
                     a.getNome(),
                     a.getCusto(),
-                    null // Deixa as demais linhas vazias na coluna de total
+                    null /**
+                 * Deixa as demais linhas vazias na coluna de total
+                 */
                 });
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,7 +160,9 @@ public class RelatorioGastoFerramenta extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         MenuPrincipal objetotela = new MenuPrincipal();
-        // Torna a janela visível
+        /**
+         * Torna a janela visível
+         */
         objetotela.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

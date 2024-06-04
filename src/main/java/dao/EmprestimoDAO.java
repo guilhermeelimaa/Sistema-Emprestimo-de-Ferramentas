@@ -11,11 +11,23 @@ import java.sql.Statement;
 
 public class EmprestimoDAO {
 
+    /**
+     * Lista estática que armazena objetos da classe Emprestimo.
+     */
     public static ArrayList<Emprestimo> MinhaLista = new ArrayList<>();
 
+    /**
+     * Construtor padrão da classe EmprestimoDAO.
+     */
     public EmprestimoDAO() {
     }
 
+    /**
+     * Método para obter o maior ID da tabela 'tb_emprestimo'.
+     *
+     * @return O maior ID presente na tabela 'tb_emprestimo'.
+     * @throws SQLException se ocorrer um erro ao acessar o banco de dados.
+     */
     public int maiorID() throws SQLException {
         int maiorID = 0;
         try {
@@ -31,15 +43,27 @@ public class EmprestimoDAO {
         return maiorID;
     }
 
+    /**
+     * Método para obter uma conexão com o banco de dados.
+     *
+     * @return Uma conexão com o banco de dados.
+     */
     public Connection getConexao() {
         Connection connection = null;
         try {
-            // Carregando o JDBC Driver
+            /**
+             * Carregando o JDBC Driver
+             */
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
 
-            // Configurando a conexão
-            String server = "localhost"; // Caminho do MySQL
+            /**
+             * Configurando a conexão
+             */
+            String server = "localhost";
+            /**
+             * Caminho do MySQL
+             */
             String database = "db_softwarea3";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
@@ -47,13 +71,18 @@ public class EmprestimoDAO {
 
             connection = DriverManager.getConnection(url, user, password);
 
-            // Testando a conexão
+            /**
+             * Testando a conexão
+             */
             if (connection != null) {
                 System.out.println("Status: Conectado!");
             } else {
                 System.out.println("Status: Não CONECTADO!");
             }
         } catch (ClassNotFoundException e) {
+            /**
+             * Driver não foi encontrado
+             */
             System.out.println("O driver nao foi encontrado. " + e.getMessage());
         } catch (SQLException e) {
             System.out.println("Nao foi possivel conectar...");
@@ -61,7 +90,11 @@ public class EmprestimoDAO {
         return connection;
     }
 
-    // Retorna a Lista de Emprestimo
+    /**
+     * Retorna a Lista de Emprestimos.
+     *
+     * @return A lista de emprestimos.
+     */
     public ArrayList<Emprestimo> getMinhaLista() {
         MinhaLista.clear(); // Limpa nosso ArrayList
 
@@ -85,6 +118,12 @@ public class EmprestimoDAO {
         return MinhaLista;
     }
 
+    /**
+     * Insere um emprestimo no banco de dados.
+     *
+     * @param objeto O objeto Emprestimo a ser inserido no banco de dados.
+     * @return true se a inserção for bem-sucedida, false caso contrário.
+     */
     public boolean InsertEmprestimoBD(Emprestimo objeto) {
         String sql = "INSERT INTO tb_emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega) VALUES(?,?,?,?,?)";
 
@@ -107,6 +146,12 @@ public class EmprestimoDAO {
         }
     }
 
+    /**
+     * Deleta um emprestimo do banco de dados pelo ID.
+     *
+     * @param id O ID do emprestimo a ser excluído.
+     * @return true se a exclusão for bem-sucedida, false caso contrário.
+     */
     public boolean DeleteEmprestimoBD(int id) {
         try {
             Statement stmt = this.getConexao().createStatement();
@@ -118,6 +163,12 @@ public class EmprestimoDAO {
         return true;
     }
 
+    /**
+     * Atualiza os dados de um emprestimo no banco de dados.
+     *
+     * @param objeto O objeto Emprestimo com os novos dados.
+     * @return true se a atualização for bem-sucedida, false caso contrário.
+     */
     public boolean UpdateEmprestimoBD(Emprestimo objeto) {
         String sql = "UPDATE tb_emprestimo SET amigo = ?, ferramenta = ?, dataaquisicao = ?, dataentrega = ? WHERE id = ?";
 
@@ -126,9 +177,9 @@ public class EmprestimoDAO {
 
             stmt.setString(1, objeto.getAmigo());
             stmt.setString(2, objeto.getFerramenta());
-            stmt.setString(3, objeto.getDataaquisicao()); 
-            stmt.setString(4, objeto.getDataentrega()); 
-            stmt.setInt(5, objeto.getId()); 
+            stmt.setString(3, objeto.getDataaquisicao());
+            stmt.setString(4, objeto.getDataentrega());
+            stmt.setInt(5, objeto.getId());
 
             stmt.execute();
             stmt.close();
@@ -140,6 +191,12 @@ public class EmprestimoDAO {
         }
     }
 
+    /**
+     * Carrega um emprestimo do banco de dados pelo ID.
+     *
+     * @param id O ID do emprestimo a ser carregado.
+     * @return O objeto Emprestimo carregado com os dados do banco de dados.
+     */
     public Emprestimo carregaEmprestimo(int id) {
         Emprestimo objeto = new Emprestimo();
         objeto.setId(id);
