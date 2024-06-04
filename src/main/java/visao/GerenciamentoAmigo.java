@@ -24,6 +24,7 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
         initComponents();
         this.objetoamigo = new Amigo();
         this.carregaTabela();
+        setTitle("Gerenciamentos de Amigos");
     }
 
     public void carregaTabela() {
@@ -63,15 +64,21 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
 
         jTableAmigo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Nome", "Telefone"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableAmigo.getTableHeader().setReorderingAllowed(false);
         jTableAmigo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableAmigoMouseClicked(evt);
@@ -125,9 +132,9 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(JBCancelar)
-                        .addGap(49, 49, 49)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addComponent(JBAlterar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addGap(39, 39, 39)
                         .addComponent(JBApagar)
                         .addGap(53, 53, 53))))
         );
@@ -143,7 +150,7 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(JTFTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBCancelar)
                     .addComponent(JBAlterar)
@@ -152,11 +159,15 @@ public class GerenciamentoAmigo extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
         //Libera todos os recurso da interface gráfica
-        this.dispose();
+       dispose();
+       MenuPrincipal objetotela = new MenuPrincipal();
+        // Torna a janela visível
+        objetotela.setVisible(true);
 
     }//GEN-LAST:event_JBCancelarActionPerformed
 

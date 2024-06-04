@@ -43,9 +43,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jGerenciarFerramenta = new javax.swing.JMenuItem();
         jGerenciarEmprestimo = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        jTodosEprestimos = new javax.swing.JMenuItem();
+        jFerramentasGastos = new javax.swing.JMenuItem();
+        jRankingEmprestimo = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -128,29 +128,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem5.setText("Todos Empréstimos");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jTodosEprestimos.setText("Todos Empréstimos");
+        jTodosEprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jTodosEprestimosActionPerformed(evt);
             }
         });
-        jMenuRelatorios.add(jMenuItem5);
+        jMenuRelatorios.add(jTodosEprestimos);
 
-        jMenuItem2.setText("Ferramentas e Gastos");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jFerramentasGastos.setText("Ferramentas e Gastos");
+        jFerramentasGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jFerramentasGastosActionPerformed(evt);
             }
         });
-        jMenuRelatorios.add(jMenuItem2);
+        jMenuRelatorios.add(jFerramentasGastos);
 
-        jMenuItem6.setText("Ranking de Empréstimos");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        jRankingEmprestimo.setText("Ranking de Empréstimos");
+        jRankingEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                jRankingEmprestimoActionPerformed(evt);
             }
         });
-        jMenuRelatorios.add(jMenuItem6);
+        jMenuRelatorios.add(jRankingEmprestimo);
 
         jMenuBar2.add(jMenuRelatorios);
 
@@ -164,10 +164,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCadastroAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastroAmigoActionPerformed
@@ -199,6 +200,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jGerenciarAmigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGerenciarAmigoActionPerformed
         // TODO add your handling code here:
+        dispose();
         GerenciamentoAmigo objeto = new GerenciamentoAmigo();
         objeto.setVisible(true);
 
@@ -206,37 +208,42 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jGerenciarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGerenciarFerramentaActionPerformed
         // TODO add your handling code here:
+        dispose();
         GerenciamentoFerramenta objeto = new GerenciamentoFerramenta();
         objeto.setVisible(true);
     }//GEN-LAST:event_jGerenciarFerramentaActionPerformed
 
     private void jGerenciarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGerenciarEmprestimoActionPerformed
         // TODO add your handling code here:
+        dispose();
         GerenciamentoEmprestimo objeto = new GerenciamentoEmprestimo();
         objeto.setVisible(true);
     }//GEN-LAST:event_jGerenciarEmprestimoActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jTodosEprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTodosEprestimosActionPerformed
         // TODO add your handling code here:
+        dispose();
         RelatorioEmprestimo objeto = new RelatorioEmprestimo();
         objeto.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_jTodosEprestimosActionPerformed
 
     private void jMenuRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatoriosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuRelatoriosActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void jRankingEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRankingEmprestimoActionPerformed
         // TODO add your handling code here:
+        dispose();
         RelatorioRankingEmprestimo objeto = new RelatorioRankingEmprestimo();
         objeto.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_jRankingEmprestimoActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jFerramentasGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFerramentasGastosActionPerformed
         // TODO add your handling code here:
+        dispose();
         RelatorioGastoFerramenta objeto = new RelatorioGastoFerramenta();
         objeto.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jFerramentasGastosActionPerformed
 
 /**
  * @param args the command line arguments
@@ -289,6 +296,7 @@ public static void main(String args[]) {
     private javax.swing.JMenuItem jCadastroAmigo;
     private javax.swing.JMenuItem jCadastroEmprestimos;
     private javax.swing.JMenuItem jCadastroFerramenta;
+    private javax.swing.JMenuItem jFerramentasGastos;
     private javax.swing.JMenuItem jGerenciarAmigo;
     private javax.swing.JMenuItem jGerenciarEmprestimo;
     private javax.swing.JMenuItem jGerenciarFerramenta;
@@ -299,10 +307,9 @@ public static void main(String args[]) {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenuItem jMenuSair;
+    private javax.swing.JMenuItem jRankingEmprestimo;
+    private javax.swing.JMenuItem jTodosEprestimos;
     // End of variables declaration//GEN-END:variables
 }

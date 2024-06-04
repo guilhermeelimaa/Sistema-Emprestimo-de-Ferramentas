@@ -24,6 +24,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
         initComponents();
         this.objetoemprestimo = new Emprestimo();
         this.carregaTabela();
+        setTitle("Gerenciamento de Empréstimos");
     }
 
     public void carregaTabela() {
@@ -70,15 +71,21 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
 
         jTableEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Amigo", "Ferramenta", "Data Aquisição", "Data Entrega"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableEmprestimo.getTableHeader().setReorderingAllowed(false);
         jTableEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableEmprestimoMouseClicked(evt);
@@ -146,7 +153,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
                         .addComponent(JBCancelar)
                         .addGap(63, 63, 63)
                         .addComponent(JBAlterar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                         .addComponent(JBApagar)
                         .addGap(36, 36, 36))))
         );
@@ -170,7 +177,7 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JTFDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBCancelar)
                     .addComponent(JBApagar)
@@ -179,12 +186,15 @@ public class GerenciamentoEmprestimo extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
         //Libera todos os recurso da interface gráfica
-        this.dispose();
-
+        dispose();
+        MenuPrincipal objetotela = new MenuPrincipal();
+        // Torna a janela visível
+        objetotela.setVisible(true);
     }//GEN-LAST:event_JBCancelarActionPerformed
 
     private void jTableEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEmprestimoMouseClicked
