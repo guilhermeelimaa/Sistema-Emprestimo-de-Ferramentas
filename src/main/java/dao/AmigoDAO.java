@@ -3,7 +3,7 @@ package DAO;
 import modelo.Amigo;
 import java.util.ArrayList;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import dao.ConexaoDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +14,11 @@ import java.sql.Statement;
  * banco de dados.
  */
 public class AmigoDAO {
+    
+    /**
+     * Criação de objeto responsável pela conexão com o banco de dados.
+     */
+    ConexaoDAO conexaoDAO = new ConexaoDAO();
 
     /**
      * Lista estática que armazena objetos da classe Amigo.
@@ -35,7 +40,7 @@ public class AmigoDAO {
     public int maiorID() throws SQLException {
         int maiorID = 0;
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = conexaoDAO.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT MAX(id) id FROM tb_amigo");
             res.next();
             maiorID = res.getInt("id");
@@ -44,55 +49,6 @@ public class AmigoDAO {
             // Tratamento de exceção aqui, se necessário
         }
         return maiorID;
-    }
-
-    /**
-     * Método para obter uma conexão com o banco de dados.
-     *
-     * @return Uma conexão com o banco de dados.
-     */
-    public Connection getConexao() {
-        Connection connection = null;
-        try {
-            /**
-             * Carregando o JDBC Driver
-             */
-            String driver = "com.mysql.cj.jdbc.Driver";
-            Class.forName(driver);
-
-            /**
-             * Configurando a conexão
-             */
-            String server = "localhost";
-            /**
-             * Caminho do MySQL
-             */
-            String database = "db_softwarea3";
-            String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
-            String user = "root";
-            String password = "root";
-
-            connection = DriverManager.getConnection(url, user, password);
-
-            /**
-             * Testando a conexão
-             */
-            if (connection != null) {
-                System.out.println("Status: Conectado!");
-            } else {
-                System.out.println("Status: Não CONECTADO!");
-            }
-            return connection;
-        } catch (ClassNotFoundException e) {
-            /**
-             * Driver não foi encontrado
-             */
-            System.out.println("O driver nao foi encontrado. " + e.getMessage());
-            return null;
-        } catch (SQLException e) {
-            System.out.println("Nao foi possivel conectar...");
-            return null;
-        }
     }
 
     /**
@@ -105,7 +61,7 @@ public class AmigoDAO {
         MinhaLista.clear(); // Limpa nosso ArrayList
 
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = conexaoDAO.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigo");
             while (res.next()) {
 
@@ -136,7 +92,7 @@ public class AmigoDAO {
         String sql = "INSERT INTO tb_amigo(id, nome, telefone) VALUES(?,?,?)";
 
         try {
-            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = conexaoDAO.getConexao().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getId());
             stmt.setString(2, objeto.getNome());
@@ -161,7 +117,7 @@ public class AmigoDAO {
      */
     public boolean DeleteAmigoBD(int id) {
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = conexaoDAO.getConexao().createStatement();
             stmt.executeUpdate("DELETE FROM tb_amigo WHERE id = " + id);
             stmt.close();
 
@@ -182,7 +138,7 @@ public class AmigoDAO {
         String sql = "UPDATE tb_amigo set nome = ? ,telefone = ? WHERE id = ?";
 
         try {
-            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = conexaoDAO.getConexao().prepareStatement(sql);
 
             stmt.setInt(3, objeto.getId());
             stmt.setString(1, objeto.getNome());
@@ -208,7 +164,7 @@ public class AmigoDAO {
      */
     public boolean amigoExiste(String nomeAmigo) throws SQLException {
         String sql = "SELECT COUNT(*) FROM tb_amigo WHERE nome = ?";
-        try (Connection con = getConexao(); PreparedStatement stmt = con.prepareStatement(sql)) {
+        try (Connection con = conexaoDAO.getConexao(); PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, nomeAmigo);
             try (ResultSet rs = stmt.executeQuery()) {
                 rs.next();
@@ -229,7 +185,7 @@ public class AmigoDAO {
         objeto.setId(id);
 
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = conexaoDAO.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_amigo WHERE id = " + id);
             res.next();
 

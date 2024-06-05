@@ -1,9 +1,9 @@
 package DAO;
 
+import dao.ConexaoDAO;
 import modelo.Emprestimo;
 import java.util.ArrayList;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +11,11 @@ import java.sql.Statement;
 
 public class EmprestimoDAO {
 
+    /**
+     * Criação de objeto responsável pela conexão com o banco de dados.
+     */
+    ConexaoDAO conexaoDAO = new ConexaoDAO();
+    
     /**
      * Lista estática que armazena objetos da classe Emprestimo.
      */
@@ -31,7 +36,7 @@ public class EmprestimoDAO {
     public int maiorID() throws SQLException {
         int maiorID = 0;
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = conexaoDAO.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT MAX(id) as id FROM tb_emprestimo");
             if (res.next()) {
                 maiorID = res.getInt("id");
@@ -44,53 +49,6 @@ public class EmprestimoDAO {
     }
 
     /**
-     * Método para obter uma conexão com o banco de dados.
-     *
-     * @return Uma conexão com o banco de dados.
-     */
-    public Connection getConexao() {
-        Connection connection = null;
-        try {
-            /**
-             * Carregando o JDBC Driver
-             */
-            String driver = "com.mysql.cj.jdbc.Driver";
-            Class.forName(driver);
-
-            /**
-             * Configurando a conexão
-             */
-            String server = "localhost";
-            /**
-             * Caminho do MySQL
-             */
-            String database = "db_softwarea3";
-            String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
-            String user = "root";
-            String password = "root";
-
-            connection = DriverManager.getConnection(url, user, password);
-
-            /**
-             * Testando a conexão
-             */
-            if (connection != null) {
-                System.out.println("Status: Conectado!");
-            } else {
-                System.out.println("Status: Não CONECTADO!");
-            }
-        } catch (ClassNotFoundException e) {
-            /**
-             * Driver não foi encontrado
-             */
-            System.out.println("O driver nao foi encontrado. " + e.getMessage());
-        } catch (SQLException e) {
-            System.out.println("Nao foi possivel conectar...");
-        }
-        return connection;
-    }
-
-    /**
      * Retorna a Lista de Emprestimos.
      *
      * @return A lista de emprestimos.
@@ -99,7 +57,7 @@ public class EmprestimoDAO {
         MinhaLista.clear(); // Limpa nosso ArrayList
 
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = conexaoDAO.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimo");
             while (res.next()) {
                 int id = res.getInt("id");
@@ -129,7 +87,7 @@ public class EmprestimoDAO {
         String sql = "INSERT INTO tb_emprestimo(id, amigo, ferramenta, dataaquisicao, dataentrega, status) VALUES(?,?,?,?,?,?)";
 
         try {
-            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = conexaoDAO.getConexao().prepareStatement(sql);
 
             stmt.setInt(1, objeto.getId());
             stmt.setString(2, objeto.getAmigo());
@@ -152,7 +110,7 @@ public class EmprestimoDAO {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = this.getConexao();
+            conn = conexaoDAO.getConexao();
             String sql = "UPDATE tb_emprestimo SET status = ?, dataentrega = ? WHERE id = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, status);
@@ -186,7 +144,7 @@ public class EmprestimoDAO {
      */
     public boolean DeleteEmprestimoBD(int id) {
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = conexaoDAO.getConexao().createStatement();
             stmt.executeUpdate("DELETE FROM tb_emprestimo WHERE id = " + id);
             stmt.close();
         } catch (SQLException erro) {
@@ -205,7 +163,7 @@ public class EmprestimoDAO {
         String sql = "UPDATE tb_emprestimo SET amigo = ?, ferramenta = ?, dataaquisicao = ?, dataentrega = ? WHERE id = ?";
 
         try {
-            PreparedStatement stmt = this.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = conexaoDAO.getConexao().prepareStatement(sql);
 
             stmt.setString(1, objeto.getAmigo());
             stmt.setString(2, objeto.getFerramenta());
@@ -235,7 +193,7 @@ public class EmprestimoDAO {
         objeto.setId(id);
 
         try {
-            Statement stmt = this.getConexao().createStatement();
+            Statement stmt = conexaoDAO.getConexao().createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM tb_emprestimo WHERE id = " + id);
             if (res.next()) {
                 objeto.setAmigo(res.getString("amigo"));
