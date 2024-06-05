@@ -1,7 +1,7 @@
 package DAO;
 
 import modelo.Amigo;
-import java.util.*;
+import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

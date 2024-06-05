@@ -1,6 +1,6 @@
 package modelo;
 
-import java.util.*;
+import java.util.ArrayList;
 import DAO.FerramentaDAO;
 import java.sql.SQLException;
 

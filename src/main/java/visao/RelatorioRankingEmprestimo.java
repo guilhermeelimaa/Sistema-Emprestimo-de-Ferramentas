@@ -1,11 +1,11 @@
 package visao;
 
-import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.JFrame;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Collections;
 import javax.swing.table.DefaultTableModel;
 import modelo.Emprestimo;
 
@@ -36,6 +36,15 @@ public class RelatorioRankingEmprestimo extends JFrame {
         });
     }
 
+            // Criando o modelo da tabela
+
+            DefaultTableModel model = new DefaultTableModel(new Object[]{"Nome", "Total Empréstimos",}, 0) {
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+};
+            
     private void carregarEmprestimos() {
         Emprestimo emprestimo = new Emprestimo();
         emprestimos = emprestimo.getMinhaLista();
@@ -52,13 +61,6 @@ public class RelatorioRankingEmprestimo extends JFrame {
         /* Ordenação decrescente da contagem de empréstimos */
         ArrayList<Map.Entry<String, Integer>> sortedAmigos = new ArrayList<>(countMap.entrySet());
         sortedAmigos.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
-
-        /**
-         * Criando o modelo da tabela
-         */
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Nome");
-        model.addColumn("Total Empréstimos");
 
         /**
          * Preenchendo a tabela com os dados dos empréstimos

@@ -1,11 +1,8 @@
 package visao;
 
-import modelo.Ferramenta;
-import modelo.Amigo;
 import modelo.Emprestimo;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -28,20 +25,20 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
         setVisible(true);
         setTitle("Relatório de Empréstimos");
     }
+    
+
+    // Criando o modelo da tabela
+
+    DefaultTableModel model = new DefaultTableModel(new Object[]{"Amigo", "Ferramenta", "Data aquisição", "Data Entrega", "Status"}, 0) {
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+};
 
     private void carregarEmprestimos() {
         Emprestimo emprestimo = new Emprestimo();
         emprestimos = emprestimo.getMinhaLista();
-
-        /**
-         * Criando o modelo da tabela
-         */
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Nome");
-        model.addColumn("Ferramenta");
-        model.addColumn("Data Aquisição");
-        model.addColumn("Data Devolução");
-        model.addColumn("Status");
 
         /**
          * Preenchendo a tabela com os dados dos empréstimos
